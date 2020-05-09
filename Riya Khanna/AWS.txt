@@ -1,0 +1,31 @@
+Q1.What if the .pem key file or the .ppk key file to our ec2 machine is lost?
+Ans1. Accessing the EC2 instance even if you loose the pem file is rather easy.
+
+1. First, create a new instance by creating new access file, call it 'helper' instance with same region and VPC as of the lost pem file instance.
+
+2. Now stop the lost pem file instance. Remember not to terminate instance but to stop it.
+
+3. Goto EBS volumes, select the root volume of the lost pem file instance and detach.
+
+4. Now again select the detached volume and this time you have to attach this volume to helper instance which we created before. Since helper instance already has a root volume by default as /dev/sda1, the newly attached volume will be secondary(eg: /dev/sdf).
+
+5. Login to your helper instance with its pem file.
+
+6. Execute below commands:
+# mount /dev/xvdf1 /mnt
+# cp /root/.ssh/authorized_keys /mnt/root/.ssh/
+# umount /mnt
+7. Detach the secondary volume from helper instance. 
+
+8. Again attach the volume back to our recovery instance. Start the instance. Terminate the helper instance.
+
+Use helper instance pem file to log into recovery instance.
+
+Q2.Difference between OLAP and OLTP
+Ans2. The differences between OLAP and OLTP are:
+1.OLAP stands for Online analytical processing (data warehouse) while OLTP stands for Online transaction processing (operational system).
+2.OLTPs are the original sources of the data while PLAP data comes from the various OTLP databases.
+3.OLAP helps with planning, problem solving and decision support while OLTP used to control and run fundamental business tasks.
+4.In OLAP, the inserts and updates are periodic long-running batch jobs while in OLTP they are short and fast which are initiated by end users.
+5.OLAP space requirements are larger compared to OLTP as it requires more indexes than OLAP
+6.OLAP's database design are typically de-normalized with fewer tables while in OLTP they are highly normalized with many tables.
