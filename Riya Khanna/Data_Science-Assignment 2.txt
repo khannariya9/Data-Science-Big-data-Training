@@ -1,0 +1,23 @@
+Q1. How to show the folders and files in Human Readable Format?
+Ans1. hdfs dfs -ls -h /regex
+
+Q2. How to check the total disk usage?
+Ans2 hdfs dfs -du -h /
+
+Q3. How to remove the file temporarily?
+Ans3.  hdfs dfs -rm -r /regex/test.txt
+
+Q4. How to remove the file permanently?
+Ans4. hdfs dfs -rm -skipTrash /regex/sample.txt
+
+Q5. How to retrieve the file from hadoop file location to the local system?
+Ans5. hdfs dfs -copyToLocal /regex/test.txt
+
+Q6. How to change the replication factor of the file from 3 to 5?
+Ans6. hdfs dfs -setrep -R 5 /regex/test.txt
+
+Q7. How to show the details of a NameNode?
+Ans7. hdfs dfsadmin -report
+
+Q8. How to change the owner of the file from hdfs to cloudera?
+Ans8. hdfs dfs -chown cloudera /regex/sample.txt
